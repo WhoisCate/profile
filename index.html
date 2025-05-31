@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Hansuke | Dev Anything</title>
+    <link rel="icon" type="image/png" href="https://via.placeholder.com/32?text=Z">
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- GSAP and ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay">
+        <div class="loading-spinner">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+    </div>
+
+    <!-- Background Overlay -->
+    <div class="background-overlay"></div>
+
+    <!-- Particle Effect -->
+    <div id="particles-js"></div>
+
+    <!-- Menu Navigation -->
+    <div class="circle-menu">
+        <div class="menu-item active" data-tab="home">
+            <div class="circle-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-home"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+            <span class="menu-tooltip">Trang chủ</span>
+        </div>
+        <div class="menu-item" data-tab="intro">
+            <div class="circle-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+            <span class="menu-tooltip">Giới thiệu</span>
+        </div>
+        <div class="menu-item" data-tab="skills">
+            <div class="circle-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <span class="menu-tooltip">Kỹ năng</span>
+        </div>
+        <div class="menu-item" data-tab="projects">
+            <div class="circle-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-briefcase"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            </div>
+            <span class="menu-tooltip">Dự án</span>
+        </div>
+        <div class="menu-item" data-tab="experience">
+            <div class="circle-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-history"><polyline points="1 10 4 10 4 4 20 4 20 20 14 20 14 23"/><path d="M10 14h4v4h-4z"/></svg>
+            </div>
+            <span class="menu-tooltip">Kinh nghiệm</span>
+        </div>
+        <div class="menu-item" data-tab="blog">
+            <div class="circle-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            </div>
+            <span class="menu-tooltip">Blog</span>
+        </div>
+        <div class="menu-item" data-tab="donate">
+            <div class="circle-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24  Caravansary24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart-handshake"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M12 5 9.04 7.96a2.17 2.17 0 0 0 0 3.08v0c.82.82 2.13.85 3 .07l2.07-1.9a2.82 2.82 0 0 1 3.79 0l2.96 2.66"/><path d="m18 15-2-2"/><path d="m15 18-2-2"/></svg>
+            </div>
+            <span class="menu-tooltip">Ủng hộ</span>
+        </div>
+    </div>
+
+    <!-- Tab Content -->
+    <div class="tab-container">
+        <!-- Tab 1: Home -->
+        <div class="tab-content active" id="home">
+            <div class="card">
+                <div class="profile-img-container">
+                    <img src="profile.jpg" alt="Profile" class="profile-img">
+                </div>
+                <h2 class="name">Nguyễn Xuân Tùng</h2>
+                <p class="job">Dev Lỏ</p>
+                <div class="skills">
+                    <span class="skill">HTML</span>
+                    <span class="skill">CSS</span>
+                    <span class="skill">JavaScript</span>
+                    <span class="skill">Server Management</span>
+                </div>
+                <div class="social-icons">
+                    <a href="#" id="facebook" class="social-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-facebook"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                    </a>
+                    <a href="#" id="instagram" class="social-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                    </a>
+                    <a href="#" id="tiktok" class="social-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-music"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+                    </a>
+                    <a href="#" id="github" class="social-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-github"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                    </a>
+                </div>
+                <a href="#" class="contact-btn">Contact me</a>
+            </div>
+        </div>
+
+        <!-- Tab 2: Intro -->
+        <div class="tab-content" id="intro">
+            <div class="intro-container">
+                <h1 class="intro-title">GIỚI THIỆU</h1>
+                <div class="intro-divider"></div>
+                
+                <p class="intro-text">Giới Thiệu đôi chút về bản thân mình</p>
+                
+                <div class="intro-content">
+                    <div class="intro-image">
+                        <img src="profile.jpg" alt="Profile" class="intro-profile-img">
+                    </div>
+                    <div class="intro-details">
+                        <h2 class="intro-subtitle">Server Management & Developer.</h2>
+                        <p class="intro-description">Xin chào mình là Tùng. Mình hiện tại 23 tuổi, đang làm lập trình viên, đẹp trai như Lệ rơi, mình hiện tại có xe đạp riêng, trời mưa biết chạy vào nhà, không la cà đi chơi giữa buổi trưa nắng
+Sở thích: giữ thăng bằng công tắc điện, đóng cửa tủ lạnh từ từ chờ điện tắt, há mồm thật to trước quạt đang quay.</p>
+                        
+                        <div class="intro-info">
+                            <div class="info-item">
+                                <span class="info-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-globe"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
+                                </span>
+                                <span class="info-label">Website:</span>
+                                <span class="info-value">https://github.com/WhoisCate</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                                </span>
+                                <span class="info-label">Số ĐT:</span>
+                                <span class="info-value">+84765539201</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                                </span>
+                                <span class="info-label">Nơi sống:</span>
+                                <span class="info-value">Hà Nội - Việt Nam</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+                                </span>
+                                <span class="info-label">Ngày sinh:</span>
+                                <span class="info-value">27/09/2001</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-code"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                                </span>
+                                <span class="info-label">Trình độ:</span>
+                                <span class="info-value">Chat GPT Dev 😊</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                                </span>
+                                <span class="info-label">Email:</span>
+                                <span class="info-value"><a href="mailto:xuantungofficial@gmail.com"></a></span>
+                            </div>
+                        </div>
+                        
+                        <p class="intro-footer">" Đừng ném bùn vào người khác, rất có thể là bạn ném trượt và tay bạn sẽ bị bẩn "</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 3: Skills -->
+        <div class="tab-content" id="skills">
+            <div class="skills-container">
+                <h1 class="skills-title">KỸ NĂNG</h1>
+                <div class="skills-divider"></div>
+                
+                <p class="skills-text">Dưới đây là các kỹ năng tôi đã học và áp dụng trong các dự án nhỏ.</p>
+                
+                <div class="skills-list">
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <i class="fab fa-html5 skill-icon"></i>
+                            <span class="skill-name">HTML</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 80%;"></div>
+                            <span class="progress-label">80%</span>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <i class="fab fa-css3-alt skill-icon"></i>
+                            <span class="skill-name">CSS</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 75%;"></div>
+                            <span class="progress-label">75%</span>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <i class="fab fa-js skill-icon"></i>
+                            <span class="skill-name">JavaScript</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 60%;"></div>
+                            <span class="progress-label">60%</span>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <i class="fab fa-react skill-icon"></i>
+                            <span class="skill-name">React</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 50%;"></div>
+                            <span class="progress-label">50%</span>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <i class="fab fa-node-js skill-icon"></i>
+                            <span class="skill-name">Node.js</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 40%;"></div>
+                            <span class="progress-label">40%</span>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <i class="fab fa-git-alt skill-icon"></i>
+                            <span class="skill-name">Git</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 70%;"></div>
+                            <span class="progress-label">70%</span>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <i class="fab fa-linux skill-icon"></i>
+                            <span class="skill-name">Linux Server</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 60%;"></div>
+                            <span class="progress-label">60%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 4: Projects -->
+        <div class="tab-content" id="projects">
+            <div class="projects-container">
+                <h1 class="projects-title">DỰ ÁN</h1>
+                <div class="projects-divider"></div>
+                
+                <p class="projects-text">Dưới đây là một số dự án tôi đã thực hiện để học hỏi và phát triển kỹ năng.</p>
+                
+                <div class="projects-list">
+                    <div class="project-card">
+                        <img src="https://via.placeholder.com/300x200?text=Portfolio" alt="Project 1" class="project-img">
+                        <h3 class="project-title">Portfolio Website</h3>
+                        <p class="project-desc">Website cá nhân giới thiệu bản thân và các dự án. Công nghệ: HTML, CSS, JavaScript, GitHub Pages.</p>
+                        <a href="https://github.com/WhoisCate/profile" class="project-btn">Xem trên GitHub</a>
+                    </div>
+                    <div class="project-card">
+                        <img src="https://via.placeholder.com/300x200?text=Weather+App" alt="Project 2" class="project-img">
+                        <h3 class="project-title">Weather App</h3>
+                        <p class="project-desc">Ứng dụng xem thời tiết cơ bản. Công nghệ: React, OpenWeather API.</p>
+                        <a href="https://github.com/WhoisCate/weather-app" class="project-btn">Xem trên GitHub</a>
+                    </div>
+                    <div class="project-card">
+                        <img src="https://via.placeholder.com/300x200?text=To-Do+List" alt="Project 3" class="project-img">
+                        <h3 class="project-title">To-Do List App</h3>
+                        <p class="project-desc">Ứng dụng quản lý công việc. Công nghệ: JavaScript, Local Storage.</p>
+                        <a href="https://github.com/WhoisCate/todo-list" class="project-btn">Xem trên GitHub</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 5: Experience -->
+<div class="tab-content" id="experience">
+    <div class="experience-container">
+        <h1 class="experience-title">KINH NGHIỆM</h1>
+        <div class="experience-divider"></div>
+        
+        <p class="experience-text">Hành trình học tập và phát triển kỹ năng lập trình, quản lý hệ thống và phát triển sản phẩm từ năm 2019 đến 2025.</p>
+        
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>2019</h3>
+                    <p>Bắt đầu tự học lập trình qua các nền tảng miễn phí như freeCodeCamp và Codecademy. Làm quen với HTML, CSS và các khái niệm cơ bản của JavaScript.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>2020</h3>
+                    <p>Thực hành các dự án nhỏ như portfolio cá nhân, landing page, và trang web tĩnh. Tìm hiểu thêm về Git và GitHub để quản lý mã nguồn.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>2022</h3>
+                    <p>Tham gia cộng đồng học tập online, nhận làm freelancer cho một vài dự án đơn giản về giao diện người dùng. Làm quen với responsive design và framework như Bootstrap.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>2023</h3>
+                    <p>Tập trung học nâng cao JavaScript (DOM manipulation, ES6+), bắt đầu làm quen với các thư viện như ReactJS. Làm các dự án nhóm nhỏ để rèn luyện kỹ năng teamwork.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>2024</h3>
+                    <p>Học quản lý server với Ubuntu, làm quen với việc triển khai web (Nginx, PM2, Docker cơ bản). Hỗ trợ nhóm bạn bè triển khai website sử dụng React và Node.js trên server tự quản lý.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>2025</h3>
+                    <p>Phát triển dự án cá nhân có tính ứng dụng thực tế. Tìm hiểu về API, backend cơ bản với Express.js và kết nối cơ sở dữ liệu MongoDB. Bắt đầu hành trình chuyên nghiệp hóa kỹ năng lập trình.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        <!-- Tab 6: Blog -->
+<div class="tab-content" id="blog">
+    <div class="blog-container">
+        <h1 class="blog-title">BLOG</h1>
+        <div class="blog-divider"></div>
+        
+        <p class="blog-text">Chia sẻ hành trình học tập và kinh nghiệm của tôi từ những ngày đầu tại Bách Khoa Hà Nội (2019) đến khi trở thành một developer ngố như bây giờ</p>
+        
+        <div class="blog-posts">
+            <div class="blog-post">
+                <h3 class="post-title">Hành trình học tập của tôi từ Bách Khoa đến lập trình</h3>
+                <p class="post-excerpt">Tôi bắt đầu học tại Bách Khoa Hà Nội năm 2019, lúc đó còn mơ hồ về công nghệ. Qua từng năm tôi tự học lập trình làm dự án nhỏ, học cách quản lý server và dần trở thành người có tư duy kỹ thuật ngố nhất team</p>
+                <a href="#" class="post-btn">Đọc thêm</a>
+            </div>
+
+            <div class="blog-post">
+                <h3 class="post-title">Hành trình học code của tôi</h3>
+                <p class="post-excerpt">Từ năm 2023, tôi bắt đầu nghiêm túc với lập trình. Tôi học HTML, CSS, JavaScript, sau đó là ReactJS và cách làm web động. Việc học code thay đổi hoàn toàn cách tôi tư duy và giải quyết vấn đề</p>
+                <a href="#" class="post-btn">Đọc thêm</a>
+            </div>
+
+            <div class="blog-post">
+                <h3 class="post-title">Cách deploy web lên GitHub Pages</h3>
+                <p class="post-excerpt">Bài viết hướng dẫn từng bước để deploy website miễn phí lên GitHub Pages – từ việc tạo repository đến việc publish trang web cá nhân hoặc landing page</p>
+                <a href="#" class="post-btn">Đọc thêm</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        <!-- Tab 7: Donate -->
+        <div class="tab-content" id="donate">
+            <div class="donate-container">
+                <h1 class="donate-title">ỦNG HỘ</h1>
+                <div class="donate-divider"></div>
+                
+                <p class="donate-text">Bạn đã từng sử dụng thứ gì đó do tôi cung cấp và muốn ủng hộ việc mà tôi làm, hãy cho tôi một ly trà đá theo các cách sau.</p>
+                
+                <div class="donate-methods">
+                    <div class="donate-method">
+                        <div class="donate-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-credit-card"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+                        </div>
+                        <h3>Chuyển qua Ngân Hàng</h3>
+                        <p>VCB : 1053105539</p>
+                    </div>
+                    
+                    <div class="donate-method">
+                        <div class="donate-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wallet"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"/></svg>
+                        </div>
+                        <h3>Chuyển tiền qua MOMO</h3>
+                        <p>0765539201</p>
+                    </div>
+                    
+                    <div class="donate-method">
+                        <div class="donate-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-paypal"><path d="M7.144 19.532l1.049-5.751"/><path d="M11.292 13.78H8.545a.741.741 0 0 1-.72-.598l-1.04-5.8a.74.74 0 0 1 .72-.884h5.212a2.78 2.78 0 0 1 2.755 2.35"/><path d="M15.5 7.5h2.358a2.66 2.66 0 0 1 2.633 2.25l.971 5.83a.74.74 0 0 1-.728.87h-2.258"/><path d="M17.105 16.45H15.01a.74.74 0 0 1-.73-.598l-.97-5.812"/></svg>
+                        </div>
+                        <h3>Chuyển tiền qua Dép Lào Bay</h3>
+                        <p>Này thì không dùng nhé :D</p>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <h2 class="form-title">Liên hệ với tôi</h2>
+                    <form action="#" method="POST">
+                        <div class="form-group">
+                            <label for="name">Họ và tên</label>
+                            <input type="text" id="name" name="name" placeholder="Nhập tên của bạn" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" placeholder="Nhập email của bạn" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Tin nhắn</label>
+                            <textarea id="message" name="message" placeholder="Nhập tin nhắn" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Gửi</button>
+                    </form>
+                </div>
+
+                <div class="author-section">
+                    <h2 class="author-name">Nguyễn Xuân Tùng</h2>
+                    <p class="author-quote">Bình thường thi thoảng Bất Bình Thường.</p>
+                    
+                    <div class="author-social">
+                        <a href="#" id="author-facebook" class="social-circle">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-facebook"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                        </a>
+                        <a href="#" id="author-messenger" class="social-circle">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+                        </a>
+                        <a href="#" id="author-telegram" class="social-circle">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-send"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+                        </a>
+                        <a href="#" id="author-email" class="social-circle">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <div class="scroll-to-top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-up"><path d="m18 15-6-6-6 6"/></svg>
+    </div>
+
+    <!-- Particles.js for background effects -->
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
