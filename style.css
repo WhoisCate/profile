@@ -714,12 +714,13 @@ body {
 
 .timeline {
   position: relative;
-  max-width: 700px;  /* Giữ max-width để không quá rộng trên màn hình lớn */
-  width: 100%;       /* Để chiếm hết chiều rộng container hoặc màn hình */
+  max-width: 700px;
+  width: 100%;
   margin: 0 auto;
-  padding: 0 15px;   /* Padding hợp lý để không sát viền */
-  box-sizing: border-box;
+  padding: 0 20px;
+  box-sizing: border-box; /* rất quan trọng để padding không phá layout */
 }
+
 
 .timeline::before {
   content: '';
